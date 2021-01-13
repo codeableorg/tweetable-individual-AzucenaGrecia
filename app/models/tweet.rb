@@ -7,7 +7,7 @@ end
 # Table name: tweets
 #
 #  id             :bigint           not null, primary key
-#  body           :text
+#  body           :text             not null
 #  comments_count :integer          default(0)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
