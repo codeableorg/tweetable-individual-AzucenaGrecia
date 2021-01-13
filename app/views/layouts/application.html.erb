@@ -8,8 +8,17 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <header>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+      <% if current_user %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+      <% else %>
+      <%= link_to "Sign In", new_user_session_path %>
+      <%end%>
+    </header>
+    
     <%= yield %>
   </body>
 </html>
