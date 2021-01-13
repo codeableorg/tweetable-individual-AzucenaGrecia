@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_204142) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text "body", null: false
+    t.text "body"
     t.bigint "tweet_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_204142) do
   end
 
   create_table "tweets", force: :cascade do |t|
-    t.text "body", null: false
+    t.text "body"
     t.integer "comments_count", default: 0
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 2021_01_13_204142) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "username", null: false
-    t.string "name", null: false
+    t.string "username"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -6,10 +6,10 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :tweets, dependent: :destroy
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, uniqueness: true
   validate :email_format
-  validates :username, presence: true, uniqueness: true
-  validates :name, presence: true
+  # validates :username, uniqueness: true
+  # validates :name, presence: true
 
   # rubocop:disable Style/GuardClause
 
@@ -29,11 +29,11 @@ end
 #  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  name                   :string           not null
+#  name                   :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  username               :string           not null
+#  username               :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
