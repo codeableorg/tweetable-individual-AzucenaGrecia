@@ -1,3 +1,9 @@
+Rails.application.routes.draw do
+  devise_for :users
+  root to: "home#index"
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+end
+
 # == Route Map
 #
 #                                Prefix Verb   URI Pattern                                                                              Controller#Action
@@ -37,9 +43,3 @@
 #                    rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                              active_storage/disk#show
 #             update_rails_disk_service PUT    /rails/active_storage/disk/:encoded_token(.:format)                                      active_storage/disk#update
 #                  rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
-
-Rails.application.routes.draw do
-  devise_for :users
-  root to: "home#index"
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-end
