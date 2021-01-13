@@ -8,8 +8,8 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
   validate :email_format
-  # validates :username, uniqueness: true
-  # validates :name, presence: true
+  validates :username, uniqueness: true
+  validates :name, presence: true
 
   # rubocop:disable Style/GuardClause
 
