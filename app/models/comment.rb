@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-  belongs_to :tweet
+  belongs_to :tweet, counter_cache: true
   validates :body, presence: true, length: { in: 1..140 }
 end
 
