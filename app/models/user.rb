@@ -5,6 +5,21 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one_attached :avatar
   has_many :tweets, dependent: :destroy
+
+  validates :email, presence: true, uniqueness: true
+  validate :email_format
+  validates :username, presence: true, uniqueness: true
+  validates :name, presence: true
+
+  # rubocop:disable Style/GuardClause
+
+  def email_format
+    unless email =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+      errors.add(:email,
+                 'is not an email')
+    end
+  end
+  # rubocop:enable Style/GuardClause
 end
 
 # == Schema Information

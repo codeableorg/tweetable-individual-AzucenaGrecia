@@ -1,5 +1,6 @@
 class Comment < ApplicationRecord
   belongs_to :tweet
+  validates :body, presence: true, length: { in: 1..140 }
 end
 
 # == Schema Information
