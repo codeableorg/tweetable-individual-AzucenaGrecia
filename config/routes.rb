@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :tweets, except: %i[index] do
+  resources :tweets do
     resources :comments, only: %i[create edit update destroy]
   end
   root to: 'tweets#index'

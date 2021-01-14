@@ -24,6 +24,7 @@ class TweetsController < ApplicationController
     if @tweet.save
       redirect_to tweets_path
     else
+      @tweets = Tweet.all
       render 'index'
     end
   end
