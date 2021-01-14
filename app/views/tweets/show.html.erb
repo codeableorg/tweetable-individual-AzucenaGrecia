@@ -1,13 +1,20 @@
 <h1>SHOY SE SHOW DE UN TWEET</h1>
 <ul>
   <% @comments.each do |comment|%>
+    <%if comment.errors.any? %>
+      <ul>
+        <% comment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
     <div class= "tweetBox">
       <li>
         <div class="tweetBox__img">
           <%= comment.user.avatar.attached? ? image_tag(comment.user.avatar) : image_tag('default_user.svg') %>
         </div>
         <div class="tweetBox__content">
-          <div class="tweetBox__content__title">  
+          <div class="tweetBox__content__title">
             <%= comment.user.name %>
             @<%= comment.user.username%>
             <%= time_ago_in_words(comment.created_at) %>
@@ -16,8 +23,8 @@
             <%= comment.body %>
           </div>
           <div class="tweetBox__content__comments_and_edit_delete">
-            <%= link_to image_tag('edit_icon.svg') %>
-            <%= link_to image_tag('delete_icon.svg')%>
+            <%= link_to image_tag('edit_icon.svg'), edit_tweet_comment_path(@tweet,comment) %>
+            <%= link_to image_tag('delete_icon.svg'), tweet_comment_path(@tweet,comment), method: :delete, data: {confirm: 'Are you sure?'}%>
           </div>
         </div>
       </li>
