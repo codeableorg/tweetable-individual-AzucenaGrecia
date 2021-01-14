@@ -17,9 +17,11 @@
         <div class="tweetBox__content__body">
           <%= tweet.body%>
         </div>
-        <div class="tweetBox__content__comments">
-          <%= image_tag('comment_icon.svg')%>
-          <%= tweet.comments_count %>
+        <div class="tweetBox__content__comments_and_edit_delete">
+          <%= link_to image_tag('comment_icon.svg')%> 
+          <%= tweet.comments_count%>
+          <%= link_to image_tag('delete_icon.svg'), edit_tweet_path(tweet) %>
+          <%= link_to image_tag('edit_icon.svg'), tweet_path(tweet) , method: :delete, data: {confirm: 'Are you sure?'} %>
         </div>
       </div>
     </li>
