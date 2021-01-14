@@ -4,6 +4,11 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new
   end
 
+  def show
+    @tweet = Tweet.find(params[:id])
+    @comments = @tweet.comments
+  end
+
   def edit
     @tweet = Tweet.find(params[:id])
   end
@@ -19,7 +24,7 @@ class TweetsController < ApplicationController
     if @tweet.save
       redirect_to tweets_path
     else
-      render '/'
+      render 'index'
     end
   end
 

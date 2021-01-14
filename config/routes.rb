@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :tweets
+  resources :tweets, except: %i[index] do
+    resources :comments, only: %i[create edit update destroy]
+  end
   root to: 'tweets#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
@@ -23,7 +25,15 @@ end
 #                                       PUT    /users(.:format)                                                                         devise/registrations#update
 #                                       DELETE /users(.:format)                                                                         devise/registrations#destroy
 #                                       POST   /users(.:format)                                                                         devise/registrations#create
-#                                  root GET    /                                                                                        home#index
+#                                tweets GET    /tweets(.:format)                                                                        tweets#index
+#                                       POST   /tweets(.:format)                                                                        tweets#create
+#                             new_tweet GET    /tweets/new(.:format)                                                                    tweets#new
+#                            edit_tweet GET    /tweets/:id/edit(.:format)                                                               tweets#edit
+#                                 tweet GET    /tweets/:id(.:format)                                                                    tweets#show
+#                                       PATCH  /tweets/:id(.:format)                                                                    tweets#update
+#                                       PUT    /tweets/:id(.:format)                                                                    tweets#update
+#                                       DELETE /tweets/:id(.:format)                                                                    tweets#destroy
+#                                  root GET    /                                                                                        tweets#index
 #         rails_postmark_inbound_emails POST   /rails/action_mailbox/postmark/inbound_emails(.:format)                                  action_mailbox/ingresses/postmark/inbound_emails#create
 #            rails_relay_inbound_emails POST   /rails/action_mailbox/relay/inbound_emails(.:format)                                     action_mailbox/ingresses/relay/inbound_emails#create
 #         rails_sendgrid_inbound_emails POST   /rails/action_mailbox/sendgrid/inbound_emails(.:format)                                  action_mailbox/ingresses/sendgrid/inbound_emails#create

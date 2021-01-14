@@ -2,31 +2,25 @@
 <div class="container__new-tweetBox">
   <% if current_user %>
     <%= form_with model: @tweet, local: true do |form| %>
-      <%# <%if @tweet.errors.any? %> 
-        <%# <ul> %>
-          <%# <% @tweet.errors.full_messages.each do |msg| %> %>
-            <%# <li><%= msg %></li> %>
-          <%# <% end %> %>
-        <%# </ul> %>
-      <%# <% end %> %>
       <%= form.text_area :body, placeholder: 'Remember to thing before write...' %>
       <%= form.submit 'tweet' %>
     <% end %>
   <% end %>
-  <div>
+</div>
     <div class= "container__tweetBox">
       <ul>
         <% @tweets.each do |tweet| %>
           <div class= "tweetBox">
             <li>
+            <%= link_to tweet_path(tweet) do %>
               <div class="tweetBox__img">
-                <%= tweet.user.avatar.attached? ? image_tag(tweet.avatar) : image_tag('default_user.svg') %>
+                <%= tweet.user.avatar.attached? ? image_tag(tweet.user.avatar) : image_tag('default_user.svg') %>
               </div>
               <div class="tweetBox__content">
                 <div class="tweetBox__content__title">
                   <%= tweet.user.name %>
                   @<%= tweet.user.username %>
-                  <%= time_ago_in_words(tweet.user.created_at) %>
+                  <%= time_ago_in_words(tweet.created_at) %>
                 </div>
                 <div class="tweetBox__content__body">
                   <%= tweet.body%>
@@ -38,6 +32,7 @@
                   <%= link_to image_tag('delete_icon.svg'), tweet_path(tweet) , method: :delete, data: {confirm: 'Are you sure?'} %>
                 </div>
               </div>
+            <% end %>
             </li>
           </div>
         <% end %>
