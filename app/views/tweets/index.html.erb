@@ -2,10 +2,29 @@
 <div class= "Container__tweetBox">
 <ul>
 <% @tweets.each do |tweet| %>
-  <li>
-    <%= tweet.user.avatar.attached? ? image_tag(tweet.avatar) : image_tag('default_user.svg') %>
-    <%= tweet.body%>
-  </li>
+
+  <div class= "tweetBox">
+    <li>
+      <div class="tweetBox__img">
+      <%= tweet.user.avatar.attached? ? image_tag(tweet.avatar) : image_tag('default_user.svg') %>
+      </div>
+      <div class="tweetBox__content">
+        <div class="tweetBox__content__title">
+          <%= tweet.user.name %>
+          @<%= tweet.user.username %>
+          <%= tweet.user.created_at.strftime("%B %d, %Y") %>
+        </div>
+        <div class="tweetBox__content__body">
+          <%= tweet.body%>
+        </div>
+        <div class="tweetBox__content__comments">
+          <%= image_tag('comment_icon.svg')%>
+          <%= tweet.comments_count %>
+        </div>
+      </div>
+    </li>
+  </div>
+  
 <% end %>
 
 </ul>
