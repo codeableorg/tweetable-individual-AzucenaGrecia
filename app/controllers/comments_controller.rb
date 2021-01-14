@@ -22,14 +22,15 @@ class CommentsController < ApplicationController
   end
 
   def create
-    # @comment = Comments.new(tweet_params)
-    # @tweet.user = current_user
-    # if @tweet.save
-    #   redirect_to tweets_path
-    # else
-    #   @tweets = Tweet.all
-    #   render 'index'
-    # end
+    @tweet = Tweet.find(params[:tweet_id])
+    @comment = Comment.new(comment_params)
+    @comment.user = current_user
+    if @comment.save
+      redirect_to tweets_path
+    else
+      @comment = Comment.all
+      redirect_to tweet_path
+    end
   end
 
   private

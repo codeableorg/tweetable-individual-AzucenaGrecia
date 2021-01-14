@@ -1,4 +1,44 @@
 <h1>SOY SE SHOW DE UN TWEET</h1>
+<div class= "tweetBox">
+  <div class="tweetBox__img">
+    <%= @tweet.user.avatar.attached? ? image_tag(@tweet.user.avatar) : image_tag('default_user.svg') %>
+  </div>
+  <div class="tweetBox__content">
+    <div class="tweetBox__content__title">
+      <%= @tweet.user.name %>
+      @<%= @tweet.user.username %>
+      <%= time_ago_in_words(@tweet.created_at) %>
+    </div>
+    <div class="tweetBox__content__body">
+      <%= @tweet.body%>
+    </div>
+    <div class="tweetBox__content__comments_and_edit_delete">
+      <%= link_to image_tag('comment_icon.svg')%>
+      <%= @tweet.comments_count%>
+      <%= link_to image_tag('edit_icon.svg'), edit_tweet_path(@tweet) %>
+      <%= link_to image_tag('delete_icon.svg'), tweet_path(@tweet) , method: :delete, data: {confirm: 'Are you sure?'} %>
+    </div>
+  </div>
+</div>
+
+
+<div class="container__new-tweetBox">
+  <% if current_user %>
+    <%= current_user.avatar.attached? ? image_tag(current_user.avatar) : image_tag('default_user.svg') %>
+    <%= form_with model: [@tweet, @comment] , local: true do |form| %>
+      <%if @comment.errors.any? %>
+        <ul>
+          <% @comment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <%= form.text_area :body, placeholder: 'Remember to thing before write...' %>
+      <%= form.submit 'comment' %>
+    <% end %>
+  <% end %>
+</div>
+
 <ul>
   <% @comments.each do |comment|%>
     <%if comment.errors.any? %>
