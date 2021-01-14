@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
 
   def create
     @tweet = Tweet.find(params[:tweet_id])
-    @comment =  @tweet.comments.new(comment_params)
+    @comment = @tweet.comments.new(comment_params)
     @comment.user = current_user
     if @comment.save
       redirect_to tweets_path
