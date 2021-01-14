@@ -1,0 +1,12 @@
+<%= form_with model: @tweet, local: true do |form| %>
+<%if @tweet.errors.any? %>
+<ul>
+  <% @tweet.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+<%= form.label :body %>
+<%= form.text_field :body %>
+<%= form. submit %>
+<% end %>
