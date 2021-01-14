@@ -1,10 +1,26 @@
 class TweetsController < ApplicationController
   def index
     @tweets = Tweet.all
+    @tweet = Tweet.new
   end
 
   def edit
     @tweet = Tweet.find(params[:id])
+  end
+
+  def new
+    @tweet = Tweet.new
+    # redirect_to tweets_path
+  end
+
+  def create
+    @tweet = Tweet.new(tweet_params)
+    @tweet.user = current_user
+    if @tweet.save
+      redirect_to tweets_path
+    else
+      render '/'
+    end
   end
 
   def update
@@ -22,7 +38,7 @@ class TweetsController < ApplicationController
     redirect_to tweets_path
   end
 
-  private 
+  private
 
   def tweet_params
     params.require(:tweet).permit(:body)
