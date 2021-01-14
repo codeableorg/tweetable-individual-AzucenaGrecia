@@ -1,5 +1,11 @@
 <h2>Home</h2>
-<div class= "Container__tweetBox">
+<div class="container__new-tweetBox">
+  <% if current_user %>
+  <%= link_to 'create a new tweet', tweets_path%>
+  <% end %>
+<div>
+
+<div class= "container__tweetBox">
 <ul>
 <% @tweets.each do |tweet| %>
 
@@ -12,7 +18,7 @@
         <div class="tweetBox__content__title">
           <%= tweet.user.name %>
           @<%= tweet.user.username %>
-          <%= tweet.user.created_at.strftime("%B %d, %Y") %>
+          <%= time_ago_in_words(tweet.user.created_at) %>
         </div>
         <div class="tweetBox__content__body">
           <%= tweet.body%>
