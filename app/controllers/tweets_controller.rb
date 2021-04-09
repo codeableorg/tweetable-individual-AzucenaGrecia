@@ -33,7 +33,7 @@ class TweetsController < ApplicationController
   def update
     @tweet = Tweet.find(params[:id])
     if @tweet.update(tweet_params)
-      redirect_to tweets_path
+      redirect_to @tweet
     else
       render 'edit'
     end

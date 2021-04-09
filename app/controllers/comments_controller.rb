@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     @tweet = Tweet.find(params[:tweet_id])
     @comment = @tweet.comments.find(params[:id])
     if @comment.update(comment_params)
-      redirect_to tweets_path
+      redirect_to @tweet
     else
       render 'edit'
     end
@@ -26,10 +26,10 @@ class CommentsController < ApplicationController
     @comment = @tweet.comments.new(comment_params)
     @comment.user = current_user
     if @comment.save
-      redirect_to tweets_path
+      redirect_to @tweet
     else
-      @comment = Comment.all
-      redirect_to 'show'
+      @comments = @tweet.comments.first(@tweet.comments.length-1)
+      render 'tweets/show'
     end
   end
 
