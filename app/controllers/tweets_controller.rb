@@ -1,12 +1,12 @@
 class TweetsController < ApplicationController
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.all.sort{|x,y| y[:created_at]<=>x[:created_at]}
     @tweet = Tweet.new
   end
 
   def show
     @tweet = Tweet.find(params[:id])
-    @comments = @tweet.comments
+    @comments = @tweet.comments.sort{|x,y| y[:created_at]<=>x[:created_at]}
     @comment = Comment.new
   end
 
@@ -25,7 +25,7 @@ class TweetsController < ApplicationController
     if @tweet.save
       redirect_to tweets_path
     else
-      @tweets = Tweet.all
+      @tweets = Tweet.all.sort{|x,y| y[:created_at]<=>x[:created_at]}
       render 'index'
     end
   end
