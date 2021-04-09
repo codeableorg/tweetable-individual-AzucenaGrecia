@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
     tweet = Tweet.find(params[:tweet_id])
     comment = tweet.comments.find(params[:id])
     comment.destroy
-    redirect_to tweets_path
+    redirect_to tweet
   end
 
   def create
