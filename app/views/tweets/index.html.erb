@@ -1,4 +1,4 @@
-<h2>Home</h2>
+<h2 class="font-mono text-3xl font-bold text-gray-600">Home</h2>
 <div class="container__new-tweetBox">
   <% if current_user %>
     <%= current_user.avatar.attached? ? image_tag(current_user.avatar) : image_tag('default_user.svg') %>
