@@ -1,13 +1,18 @@
-<h4>Edit Tweet</h4>
-<%= form_with model: @tweet, local: true do |form| %>
-<%if @tweet.errors.any? %>
-<ul>
-  <% @tweet.errors.full_messages.each do |msg| %>
-  <li><%= msg %></li>
+<div class ="flex flex-col w-2/4 m-auto mt-10 bg-white">
+
+
+<div class="border border-solid border-gray-300 py-3 text-center text-3xl font-bold text-black">Edit Tweet</div>
+  <%= form_with model: @tweet, local: true, html: {class:"flex flex-col justify-end p-10 gap-3"} do |form| %>
+    <%if @tweet.errors.any? %>
+      <ul>
+        <% @tweet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= form.label :body %>
+    <%= form.text_area :body , class: "border border-solid border-blue-300 p-5 rounded-lg text-gray-600"%>
+    <%= form.submit  'Update Tweet', class: "bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full w-40 ml-auto" %>
   <% end %>
-</ul>
-<% end %>
-<%= form.label :body %>
-<%= form.text_field :body %>
-<%= form. submit %>
-<% end %>
+
+</div>
