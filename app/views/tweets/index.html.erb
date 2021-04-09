@@ -1,25 +1,23 @@
 <div class ="flex flex-col w-2/4 m-auto mt-10">
 
-  <div class="flex flex-col">
-
-      <div class="border border-solid border-gray-300 py-3 text-center font-mono text-3xl font-bold text-gray-600">Home</div>
-      <div class="flex justify-between p-3">
-        <% if current_user %>
-            <div/><%= current_user.avatar.attached? ? image_tag(current_user.avatar, class:"h-20 w-20 rounded-full") : image_tag('default_user.svg') %></div>
+  <div class="flex flex-col bg-white mb-8">
+      <div class="border border-solid border-gray-300 py-3 text-center text-3xl font-bold text-black ">Home</div>
+        <div class="flex justify-between p-3">
+          <% if current_user %>
+            <%= current_user.avatar.attached? ? image_tag(current_user.avatar, class:"h-14 w-14 rounded-full") : image_tag('default_user.svg') %>
             <%= form_with model: @tweet, local: true ,  html: {class: "w-5/6 flex flex-col justify-between items-end"} do |form| %>
               <%if @tweet.errors.any? %>
-                <ul>
+                <ul class="w-full text-red-500 text-sm">
                   <% @tweet.errors.full_messages.each do |msg| %>
                     <li><%= msg %></li>
                   <% end %>
                 </ul>
               <% end %>
-              <%= form.text_area :body, placeholder: 'Remember to thing before write...', class:"w-full"  %>
+              <div  class="w-full"><%= form.text_area :body , placeholder: 'Remember to thing before write...' , class:"w-full"%></div>
               <%= form.submit 'Tweet' , class: "bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full" %>
             <% end %>
           <% end %>
       </div>
-
   </div>
 
 
@@ -28,27 +26,31 @@
     <ul>
       <% @tweets.each do |tweet| %>
         <div class= "tweetBox">
-          <li>
+          <li class= "flex justify-between border border-solid border-gray-300 bg-white py-2 px-2">
             <%= link_to tweet_path(tweet) do %>
               <div class="tweetBox__img">
-                <%= tweet.user.avatar.attached? ? image_tag(tweet.user.avatar) : image_tag('default_user.svg') %>
+                <%= tweet.user.avatar.attached? ? image_tag(tweet.user.avatar,  class:"h-14 w-14 rounded-full") : image_tag('default_user.svg') %>
               </div>
-              <div class="tweetBox__content">
-                <div class="tweetBox__content__title">
-                  <%= tweet.user.name %>
-                  @<%= tweet.user.username %>
-                  <%= time_ago_in_words(tweet.created_at) %>
+              <div class="tweetBox__content w-11/12 pl-3">
+                <div class="tweetBox__content__title flex gap-2.5">
+                  <div class ="font-semibold text-black"><%= tweet.user.name%></div>
+                  <div class ="font-normal text-blue-400">@<%= tweet.user.username %></div>
+                  <div class ="font-normal text-blue-400"><%= time_ago_in_words(tweet.created_at) %></div>
                 </div>
-                <div class="tweetBox__content__body">
-                  <%= tweet.body%>
+                <div class="tweetBox__content__body text-gray-500">
+                  <%= tweet.body %>
                 </div>
-                <div class="tweetBox__content__comments_and_edit_delete">
-                  <%= link_to image_tag('comment_icon.svg')%>
-                  <%= tweet.comments_count%>
-                  <% if current_user == tweet.user %>
-                    <%= link_to image_tag('edit_icon.svg'), edit_tweet_path(tweet) %>
-                    <%= link_to image_tag('delete_icon.svg'), tweet_path(tweet) , method: :delete, data: {confirm: 'Are you sure?'} %>
-                  <% end %>
+                <div class="tweetBox__content__comments_and_edit_delete flex justify-end">
+                  <div class="flex ">
+                    <%= link_to image_tag('comment_icon.svg')%>
+                    <%= tweet.comments_count%>
+                  </div>
+                  <div class = "w-auto ml-6 flex gap-2.5">
+                    <% if current_user == tweet.user %>
+                      <%= link_to image_tag('edit_icon.svg'), edit_tweet_path(tweet) %>
+                      <%= link_to image_tag('delete_icon.svg'), tweet_path(tweet) , method: :delete, data: {confirm: 'Are you sure?'} %>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             <% end %>
