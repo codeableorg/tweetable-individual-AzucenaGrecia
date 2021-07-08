@@ -1,0 +1,13 @@
+<h4>Edit Comment</h4>
+<%= form_with model: [@tweet,@comment], local: true do |form| %>
+<%if @comment.errors.any? %>
+  <ul>
+    <% @comment.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form.label :body %>
+<%= form.text_field :body %>
+<%= form.submit 'edit'%>
+<% end %>

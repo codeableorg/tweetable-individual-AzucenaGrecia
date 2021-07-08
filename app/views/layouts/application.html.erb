@@ -4,12 +4,35 @@
     <title>TweetableIndividual</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-  <body>
+  </head>
+  <body class= "bg-gray-100">
+    <header class=" text-lg font-normal text-blue-500">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+      <div class="flex justify-around ">
+        <div class="w-10">
+          <%= link_to image_tag("logo.png"), root_path %>    
+        </div>
+
+        <div class="flex items-center gap-8">
+          <% if current_user %>
+            <p class="tracking-tighter"><%=link_to "Edit Profile", edit_user_registration_path%></p>
+            <button class="py-2 px-4 border-blue-400 font-semibold rounded-lg shadow-md  bg-gradient-to-r from-green-400 to-blue-500 text-white"><%= link_to "Logout", destroy_user_session_path, method: :delete %></button>
+            <% else %>
+            <%= link_to "Sign In", new_user_session_path %>
+          <%end%>  
+        </div>
+      </div>
+      
+      
+
+    </header>
+    
     <%= yield %>
   </body>
 </html>
